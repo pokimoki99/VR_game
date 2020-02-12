@@ -6,6 +6,7 @@ TagManager:
   tags:
   - projectile
   - deflected_projectile
+  - Sword
   layers:
   - Default
   - TransparentFX
