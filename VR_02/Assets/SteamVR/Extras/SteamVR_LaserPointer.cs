@@ -1,6 +1,7 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
 using System.Collections;
+using Valve.VR;
 
 namespace Valve.VR.Extras
 {
@@ -17,7 +18,7 @@ namespace Valve.VR.Extras
         public Color clickColor = Color.green;
         public GameObject holder;
         public GameObject pointer;
-        bool isActive = false;
+        public bool isActive = false;
         public bool addRigidBody = false;
         public Transform reference;
         public event PointerEventHandler PointerIn;
@@ -25,6 +26,14 @@ namespace Valve.VR.Extras
         public event PointerEventHandler PointerClick;
 
         Transform previousContact = null;
+
+        public SteamVR_Action_Boolean LaserL;
+        public SteamVR_Input_Sources inputSource = SteamVR_Input_Sources.Any;//which controller
+
+        public SteamVR_Input_Sources LeftInputSource = SteamVR_Input_Sources.LeftHand;
+        public SteamVR_Input_Sources RightInputSource = SteamVR_Input_Sources.RightHand;
+
+        bool check;
 
 
         private void Start()
@@ -68,6 +77,15 @@ namespace Valve.VR.Extras
             Material newMaterial = new Material(Shader.Find("Unlit/Color"));
             newMaterial.SetColor("_Color", color);
             pointer.GetComponent<MeshRenderer>().material = newMaterial;
+
+            if (this.name == "LeftHand")
+            {
+                inputSource = SteamVR_Input_Sources.LeftHand;
+            }
+            if (this.name == "RightHand")
+            {
+                inputSource = SteamVR_Input_Sources.RightHand;
+            }
         }
 
         public virtual void OnPointerIn(PointerEventArgs e)
@@ -91,11 +109,30 @@ namespace Valve.VR.Extras
 
         private void Update()
         {
-            if (!isActive)
+            if (active)
             {
-                isActive = true;
-                this.transform.GetChild(0).gameObject.SetActive(true);
+                isActive = active;
+                pointer?.SetActive(isActive);
             }
+            else
+            {
+                isActive = active;
+                pointer?.SetActive(isActive);
+            }
+            if (!isActive)
+                return;
+
+            if (check)
+            {
+                active = true;
+                check = false;
+            }
+            else
+            {
+                active = false;
+            }
+
+
 
             float dist = 100f;
 
@@ -142,18 +179,52 @@ namespace Valve.VR.Extras
                 OnPointerClick(argsClick);
             }
 
-            if (interactWithUI != null && interactWithUI.GetState(pose.inputSource))
-            {
+            //if (interactWithUI != null && interactWithUI.GetState(pose.inputSource))
+            //{
                 pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
                 pointer.GetComponent<MeshRenderer>().material.color = clickColor;
-            }
-            else
-            {
-                pointer.transform.localScale = new Vector3(thickness, thickness, dist);
-                pointer.GetComponent<MeshRenderer>().material.color = color;
-            }
+            //}
+            //else
+            //{
+            //    pointer.transform.localScale = new Vector3(thickness, thickness, dist);
+            //    pointer.GetComponent<MeshRenderer>().material.color = color;
+            //}
             pointer.transform.localPosition = new Vector3(0f, 0f, dist / 2f);
+            
         }
+        private void OnEnable()
+        {
+            if (LaserL!=null)
+            {
+                LaserL.AddOnStateDownListener(Press, inputSource);
+                check = true;
+            }
+
+        }
+        private void OnDisable()
+        {
+            if (LaserL!=null)
+            {
+                LaserL.RemoveOnStateDownListener(Press, inputSource);
+                check = false;
+            }
+
+        }
+        
+
+
+        private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        {
+            check = true;
+            print(inputSource);
+            active = true;
+            if (!active)
+            {
+                active = true;
+            }
+
+        }
+
     }
 
     public struct PointerEventArgs

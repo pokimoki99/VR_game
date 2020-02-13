@@ -440,6 +440,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2021277009}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &283958971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 144230, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1170028082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &283958975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114000011273627542, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1170028082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283958971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &283958977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283958971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f511c1adaa1e94ebe7ca97bbcabd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pose: {fileID: 283958975}
+  interactWithUI:
+    actionPath: /actions/default/in/InteractUI
+    needsReinit: 0
+  active: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  thickness: 0.002
+  clickColor: {r: 0, g: 0.15004373, b: 1, a: 1}
+  holder: {fileID: 0}
+  pointer: {fileID: 0}
+  isActive: 0
+  addRigidBody: 0
+  reference: {fileID: 0}
+  LaserL:
+    actionPath: /actions/default/in/LaserL
+    needsReinit: 0
+  inputSource: 0
+  LeftInputSource: 1
+  RightInputSource: 2
 --- !u!1 &346657065
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,10 +655,11 @@ GameObject:
   - component: {fileID: 552465742}
   - component: {fileID: 552465741}
   - component: {fileID: 552465740}
-  - component: {fileID: 552465739}
   - component: {fileID: 552465738}
   - component: {fileID: 552465746}
   - component: {fileID: 552465745}
+  - component: {fileID: 552465747}
+  - component: {fileID: 552465739}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -686,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentFlags: 44
-  attachmentOffset: {fileID: 0}
+  attachmentOffset: {fileID: 552465744}
 --- !u!114 &552465740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,7 +868,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552465737}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
   m_Name: 
@@ -885,8 +935,24 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &552465747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552465737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97a4a56c0b85d640b22cf514e661c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+  laserPointer: {fileID: 0}
+  attachmentFlags: 44
+  attachmentOffset: {fileID: 0}
 --- !u!1 &581453893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,6 +1491,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+--- !u!1 &1170028083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 160596, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1170028082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1170028084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114000011957598740, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1170028082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170028083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1170028085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170028083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f511c1adaa1e94ebe7ca97bbcabd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pose: {fileID: 1170028084}
+  interactWithUI:
+    actionPath: /actions/default/in/InteractUI
+    needsReinit: 0
+  active: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  thickness: 0.002
+  clickColor: {r: 0, g: 1, b: 0, a: 1}
+  holder: {fileID: 0}
+  pointer: {fileID: 0}
+  isActive: 0
+  addRigidBody: 0
+  reference: {fileID: 0}
+  LaserL:
+    actionPath: /actions/default/in/LaserR
+    needsReinit: 0
+  inputSource: 0
+  LeftInputSource: 1
+  RightInputSource: 2
 --- !u!1 &1265691796 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1735044837062575752, guid: 12fbf23eeab61d94397caefd969c3a82,

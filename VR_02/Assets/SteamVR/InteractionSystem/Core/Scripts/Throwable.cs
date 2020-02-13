@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using Valve.VR.Extras;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -61,6 +62,7 @@ namespace Valve.VR.InteractionSystem
         [HideInInspector]
         public Interactable interactable;
 
+      
 
         //-------------------------------------------------
         protected virtual void Awake()
