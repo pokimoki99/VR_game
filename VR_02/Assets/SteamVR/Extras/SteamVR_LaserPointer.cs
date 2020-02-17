@@ -133,6 +133,11 @@ namespace Valve.VR.Extras
             }
 
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                check = true;
+                active = true;
+            }
 
             float dist = 100f;
 
