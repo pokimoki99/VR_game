@@ -34,21 +34,6 @@ public class SimpleAttach : MonoBehaviour
     }
     private void HandHoverUpdate(Hand hand)
     {
-        //GrabTypes grabType = hand.GetGrabStarting();
-        //bool isGrabEnding = hand.IsGrabEnding(gameObject);
-
-        //if ((interactable.attachedToHand = null) && (grabType != GrabTypes.None))
-        //{
-        //    hand.AttachObject(gameObject, grabType);
-        //    hand.HoverLock(interactable);
-        //    hand.HideGrabHint();
-        //}
-
-        //else if (isGrabEnding)
-        //{
-        //    hand.DetachObject(gameObject);
-        //    hand.HoverUnlock(interactable);
-        //}
 
         GrabTypes startingGrabType = hand.GetGrabStarting();
 
@@ -57,5 +42,7 @@ public class SimpleAttach : MonoBehaviour
             hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
             hand.HideGrabHint();
         }
+
+        
     }
 }

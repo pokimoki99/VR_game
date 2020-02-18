@@ -125,7 +125,7 @@ namespace Valve.VR.Extras
             if (check)
             {
                 active = true;
-                check = false;
+                //check = false;
             }
             else
             {
@@ -221,7 +221,7 @@ namespace Valve.VR.Extras
         private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {
             check = true;
-            print(inputSource);
+            //print(inputSource);
             active = true;
             if (!active)
             {
