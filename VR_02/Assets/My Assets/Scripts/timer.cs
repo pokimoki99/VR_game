@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class timer : MonoBehaviour
 {
-    int timerstart= 200;
+    public int timerstart;
     public Text textu;
     public Text text1;
     public Text text2;
@@ -12,9 +12,9 @@ public class timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cdt();
+        //cdt();
     }
-    void cdt()
+    public void cdt()
     {
         if (timerstart > -1) 
         {
