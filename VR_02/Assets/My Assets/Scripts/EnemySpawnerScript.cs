@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class EnemySpawnerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject theEnemy;
+    public int xPos;
+    public int zPos;
+    public int enemyCount;
     void Start()
     {
-        
+        StartCoroutine(EnemyDrop());
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator EnemyDrop()
     {
-        
+        while (enemyCount < 10)
+        {
+            xPos = Random.Range(0, 26);
+            zPos = Random.Range(11, 30);
+            Instantiate(theEnemy, new Vector3(xPos, 29, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(1.0f);
+            enemyCount += 1;
+        }
     }
 }
