@@ -5,22 +5,26 @@ using UnityEngine;
 public class EnemySpawnerScript : MonoBehaviour
 {
     public GameObject theEnemy;
-    public int xPos;
-    public int zPos;
-    public int enemyCount;
+    int xPos;
+    int zPos;
+    int enemyCount;
+    public timer tim;
     void Start()
     {
         StartCoroutine(EnemyDrop());
     }
     IEnumerator EnemyDrop()
     {
-        while (enemyCount < 10)
+        if (tim.timerstart<=200 && tim.timerstart>=0)
         {
-            xPos = Random.Range(0, 26);
-            zPos = Random.Range(11, 30);
-            Instantiate(theEnemy, new Vector3(xPos, 29, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(1.0f);
-            enemyCount += 1;
+            while (enemyCount < 10)
+            {
+                xPos = Random.Range(0, 26);
+                zPos = Random.Range(11, 30);
+                Instantiate(theEnemy, new Vector3(xPos, 29, zPos), Quaternion.identity);
+                yield return new WaitForSeconds(1.0f);
+                enemyCount += 1;
+            }
         }
     }
 }
