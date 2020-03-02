@@ -53,11 +53,7 @@ public class Button : MonoBehaviour
     {
         if (selection)
         {
-            Debug.Log("is selected");
-
-                //gameObject.transform.Translate(0, -0.01f*Time.deltaTime, 0);
-
-                gameObject.transform.position=Vector3.MoveTowards(transform.position,target.position,Time.deltaTime);
+            gameObject.transform.position=Vector3.MoveTowards(transform.position,target.position,Time.deltaTime);
             Destroy(del);
             text.GetComponent<Text>().enabled = false;
 

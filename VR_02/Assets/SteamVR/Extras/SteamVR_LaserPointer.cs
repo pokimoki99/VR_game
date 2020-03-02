@@ -210,7 +210,7 @@ namespace Valve.VR.Extras
         {
             if (LaserL!=null)
             {
-                LaserL.RemoveOnStateDownListener(Press, inputSource);
+                LaserL.AddOnStateUpListener(UnPress, inputSource);
                 check = false;
             }
 
@@ -220,14 +220,11 @@ namespace Valve.VR.Extras
 
         private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {
-            check = true;
-            //print(inputSource);
             active = true;
-            if (!active)
-            {
-                active = true;
-            }
-
+        }
+        private void UnPress(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        {
+            active = false;
         }
 
     }

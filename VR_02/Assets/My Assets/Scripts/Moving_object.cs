@@ -8,7 +8,7 @@ using Valve.VR.InteractionSystem;
 public class Moving_object : MonoBehaviour
 {
     public bool selected;
-    public SteamVR_LaserPointer laserPointer;
+    public SteamVR_LaserPointer Left_laserPointer;
 
 
     [EnumFlags]
@@ -19,34 +19,38 @@ public class Moving_object : MonoBehaviour
     public Transform attachmentOffset;
 
     public bool attach;
-    public Hand hand;
+    public Hand Lefthand;
     public HandEvent onHeldUpdate;
-    public SteamVR_Action_Boolean GrabPinch;
-    public SteamVR_Input_Sources inputSource = SteamVR_Input_Sources.Any;//which controller
+    public SteamVR_Action_Boolean GrabGrip;
+    public SteamVR_Input_Sources Left_inputSource = SteamVR_Input_Sources.LeftHand;//which controller
 
     float distance=0;
     Vector3 Previous_Position;
 
     Health Enemy_Health;
 
+    GrabTypes Left_startingGrabType;
+
     void Start()
     {
-        laserPointer.PointerIn += PointerInside;
-        laserPointer.PointerOut += PointerOutside;
+        Left_laserPointer.PointerIn += PointerInside;
+        Left_laserPointer.PointerOut += PointerOutside;
+
         selected = false;
         Previous_Position = new Vector3(0,0,0);
-        GrabPinch.AddOnStateUpListener(UnPress, inputSource);
+        GrabGrip.AddOnStateUpListener(UnPress, Left_inputSource);
 
     }
     public void PointerInside(object sender, PointerEventArgs e)
     {
-        OnHandHoverBegin(hand);
+        OnHandHoverBegin(Lefthand);
         if (e.target.name == this.gameObject.name && selected == false)
         {
             selected = true;
-            Debug.Log("pointer is inside this object" + e.target.name);
-            GrabPinch.AddOnStateDownListener(Press, inputSource);
-
+            if (Left_inputSource == SteamVR_Input_Sources.LeftHand)
+            {
+                GrabGrip.AddOnStateDownListener(Press, Left_inputSource);
+            }
         }
     }
     public void PointerOutside(object sender, PointerEventArgs e)
@@ -55,7 +59,6 @@ public class Moving_object : MonoBehaviour
         if (e.target.name == this.gameObject.name && selected == true)
         {
             selected = false;
-            Debug.Log("pointer is outside this object" + e.target.name);
 
         }
 
@@ -78,12 +81,16 @@ public class Moving_object : MonoBehaviour
 
     private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
     {
-        GrabTypes startingGrabType = hand.GetGrabStarting();
+        Left_startingGrabType = Lefthand.GetGrabStarting();
         Previous_Position = new Vector3(0, 0, 0);
         if (selected)
         {
-            hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
-            Previous_Position = this.gameObject.transform.position;
+            if (Left_inputSource == SteamVR_Input_Sources.LeftHand)
+            {
+                Lefthand.AttachObject(gameObject, Left_startingGrabType, attachmentFlags, attachmentOffset);
+                Previous_Position = this.gameObject.transform.position;
+                Left_startingGrabType = Lefthand.GetGrabEnding();
+            }
 
         }
 
@@ -92,7 +99,11 @@ public class Moving_object : MonoBehaviour
     private void UnPress(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
     {
         selected = false;
-        hand.DetachObject(gameObject);
+        if (Left_startingGrabType == Lefthand.GetGrabEnding())
+        {
+            Lefthand.DetachObject(gameObject);
+            Debug.Log("left hand detach");
+        }
         distance += Vector3.Distance(this.gameObject.transform.position, Previous_Position);
     }
 
