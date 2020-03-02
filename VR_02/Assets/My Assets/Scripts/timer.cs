@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class timer : MonoBehaviour
 {
-    int timerstart= 200;
+    public static int timerstart = 210; 
     public Text textu;
     public Text text1;
     public Text text2;
