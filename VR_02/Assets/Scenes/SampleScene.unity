@@ -542,7 +542,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 154720329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a768bf28544f041aae0bd3ee28549c, type: 3}
+  m_Script: {fileID: 11500000, guid: aca9e64bd16f7e343b980f635a709146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   theEnemy: {fileID: 919907215973592870, guid: aa702a7657182084fac1bd29ec03ef4d, type: 3}
@@ -557,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154720329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.798053, y: 21.621931, z: 31.279432}
+  m_LocalPosition: {x: 8.798053, y: 21.85, z: 31.279432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
