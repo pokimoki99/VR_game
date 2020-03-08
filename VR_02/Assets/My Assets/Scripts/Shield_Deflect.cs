@@ -27,6 +27,7 @@ public class Shield_Deflect : MonoBehaviour
         {
             deflect = other.transform;
             Instantiate(bulletprefab, deflect.position, deflect.rotation);
+            Destroy(other);
         }
     }
 }

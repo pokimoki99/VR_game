@@ -34,7 +34,7 @@ namespace Valve.VR.Extras
         public SteamVR_Input_Sources RightInputSource = SteamVR_Input_Sources.RightHand;
 
         bool check;
-
+        
 
         private void Start()
         {
@@ -86,6 +86,8 @@ namespace Valve.VR.Extras
             {
                 inputSource = SteamVR_Input_Sources.RightHand;
             }
+
+            //LaserL.AddOnStateUpListener(UnPress, inputSource);
         }
 
         public virtual void OnPointerIn(PointerEventArgs e)
@@ -122,15 +124,15 @@ namespace Valve.VR.Extras
             if (!isActive)
                 return;
 
-            if (check)
-            {
-                active = true;
-                //check = false;
-            }
-            else
-            {
-                active = false;
-            }
+            //if (check)
+            //{
+            //    active = true;
+            //    //check = false;
+            //}
+            //else
+            //{
+            //    active = false;
+            //}
 
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -199,32 +201,40 @@ namespace Valve.VR.Extras
         }
         private void OnEnable()
         {
-            if (LaserL!=null)
-            {
                 LaserL.AddOnStateDownListener(Press, inputSource);
-                check = true;
-            }
-
         }
-        private void OnDisable()
-        {
-            if (LaserL!=null)
-            {
-                LaserL.AddOnStateUpListener(UnPress, inputSource);
-                check = false;
-            }
-
-        }
+        //private void OnDisable()
+        //{
+        //    LaserL.AddOnStateUpListener(UnPress, inputSource);
+        //    //Debug.Log("check");
+        //}
         
 
 
         private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {
+
             active = true;
+            StartCoroutine(ExampleCoroutine());
         }
-        private void UnPress(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        //private void UnPress(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        //{
+        //    //if (!check)
+        //    //{
+        //        active = false;
+        //    //}
+        //    Debug.Log(check);
+        //}
+
+        IEnumerator ExampleCoroutine()
         {
+
+            //yield on a new YieldInstruction that waits for 5 seconds.
+            yield return new WaitForSeconds(2);
             active = false;
+            check = false;
+            Debug.Log("check");
+
         }
 
     }
@@ -238,4 +248,6 @@ namespace Valve.VR.Extras
     }
 
     public delegate void PointerEventHandler(object sender, PointerEventArgs e);
+
+
 }
