@@ -8,7 +8,7 @@ public class bulletscript : MonoBehaviour
     void Start()
     {
         
-        GetComponent<Rigidbody>().AddForce(-transform.forward * 500);
+        GetComponent<Rigidbody>().AddForce(-transform.forward * 5000);
     }
 
     void OnCollisionEnter(Collision col)
