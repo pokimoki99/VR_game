@@ -19,17 +19,17 @@ public class GunScript_Enemies : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        float dotProd = Vector3.Dot(transform.forward,(target.position - transform.position).normalized);
+    // Update is clled once per frame
+    //private void Update()
+    //{
+    //    Vector3 direction = (target.position - transform.position).normalized;
+    //    float dotProd = Vector3.Dot(transform.forward,(target.position - transform.position).normalized);
 
-        while (dotProd > 0.9)
-        {
+    //    while (dotProd > 0.9)
+    //    {
 
-            Instantiate(bulletprefab, gameObject.transform.position, gameObject.transform.rotation);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
+    //        Instantiate(bulletprefab, gameObject.transform.position, gameObject.transform.rotation);
+    //        yield return new WaitForSeconds(1.0f);
+    //    }
+    //}
 }
