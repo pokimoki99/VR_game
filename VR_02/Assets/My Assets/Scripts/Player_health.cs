@@ -16,7 +16,7 @@ public class Player_health : MonoBehaviour
         GetComponent<Health>().OnHealthPctChanged += HandleHealthChanged;
     }
 
-    private void HandleHealthChanged(float pct)
+    public void HandleHealthChanged(float pct)
     {
         //StartCoroutine(ChangeToPct(pct));
         material.SetFloat("Cutoff", 0f + pct);
