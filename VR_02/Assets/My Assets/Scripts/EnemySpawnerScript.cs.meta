@@ -3,7 +3,12 @@ guid: aca9e64bd16f7e343b980f635a709146
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - theEnemyGunner: {fileID: 919907215973592870, guid: aa702a7657182084fac1bd29ec03ef4d,
+      type: 3}
+  - theEnemySwordsmen: {fileID: 919907215973592870, guid: 87f42a70d7a536b4b95a192074f49a12,
+      type: 3}
+  - tim: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

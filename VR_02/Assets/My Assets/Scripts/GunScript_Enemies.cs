@@ -10,6 +10,8 @@ public class GunScript_Enemies : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
 
+    public float shotTime = 5.0f;
+
     public Transform bulletprefab;
     // Use this for initialization
 
@@ -19,17 +21,22 @@ public class GunScript_Enemies : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
     }
+
     // Update is clled once per frame
-    //private void Update()
-    //{
-    //    Vector3 direction = (target.position - transform.position).normalized;
-    //    float dotProd = Vector3.Dot(transform.forward,(target.position - transform.position).normalized);
+    private void Update()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        float dotProd = Vector3.Dot(transform.forward, (target.position - transform.position).normalized);
+        shotTime -= Time.deltaTime;
+        if(dotProd >= -1)
+        {
+            shotTime -= Time.deltaTime;
 
-    //    while (dotProd > 0.9)
-    //    {
-
-    //        Instantiate(bulletprefab, gameObject.transform.position, gameObject.transform.rotation);
-    //        yield return new WaitForSeconds(1.0f);
-    //    }
-    //}
+            if (shotTime <= 0.0f)
+            {
+                Instantiate(bulletprefab, gameObject.transform.position, gameObject.transform.rotation);
+                shotTime = 5.0f;
+            }
+        }
+    }
 }

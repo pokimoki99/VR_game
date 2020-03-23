@@ -8,6 +8,8 @@ TagManager:
   - deflected_projectile
   - Sword
   - waypoint
+  - enemies_projectile
+  - enemies_sword
   layers:
   - Default
   - TransparentFX
