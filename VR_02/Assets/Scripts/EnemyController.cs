@@ -36,11 +36,14 @@ public class EnemyController : MonoBehaviour
 
             agent.stoppingDistance = 10;
 
+            FaceTarget();
+            agent.SetDestination(target.position);
+
             if (distance <= agent.stoppingDistance)
             {
                 //attack the target
-                FaceTarget();
-                agent.SetDestination(target.position);
+                //FaceTarget();
+                //agent.SetDestination(target.position);
             }
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Underground_arena"))
             {

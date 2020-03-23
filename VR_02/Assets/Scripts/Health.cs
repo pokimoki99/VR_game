@@ -27,11 +27,16 @@ public class Health : MonoBehaviour
     {
         if(other.gameObject.tag == "Sword")
         {
-            ModifyHealth(-10);
+            ModifyHealth(-50);
         }
-        //if(other.gameObject.tag == "Bullet")
-        //{
-
-        //}
+        if(other.gameObject.tag == "projectile")
+        {
+            ModifyHealth(-50);
+            Debug.Log(currentHealth);
+        }
+        if(currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
