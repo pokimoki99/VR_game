@@ -23,16 +23,16 @@ public class EnemySpawnerScript : MonoBehaviour
             {
                 xPos = Random.Range(0, 26);
                 zPos = Random.Range(11, 30);
-                enemyRand = Random.Range(1, 2);
-                if(enemyRand == 1)
+                enemyRand = Random.Range(0, 2);
+                if(enemyRand == 0)
                 {
                     Instantiate(theEnemyGunner, new Vector3(xPos, 29, zPos), Quaternion.identity);
 
                 }
-                else if (enemyRand == 2)
+               
+                else
                 {
                     Instantiate(theEnemySwordsmen, new Vector3(xPos, 29, zPos), Quaternion.identity);
-
                 }
                 yield return new WaitForSeconds(3.0f);
                 enemyCount += 1;

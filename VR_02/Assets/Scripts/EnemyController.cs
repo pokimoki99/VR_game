@@ -13,20 +13,18 @@ public class EnemyController : MonoBehaviour
 
     Transform target;
     NavMeshAgent agent;
-
     public float patrolSpeed = 2f;                          // The nav mesh agent's speed when patrolling.
     public DrawWaypoint WayPoint1,WayPoint2;         // An array of transforms for the patrol route.
     int loc;
     bool check = true;
     Vector3 lastpos;
-
     void Start()
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         Location();
     }
-
+    
     void Update()
     {
         float distance = Vector3.Distance(target.position, this.transform.position);
@@ -34,7 +32,7 @@ public class EnemyController : MonoBehaviour
         {
             
 
-            agent.stoppingDistance = 10;
+            agent.stoppingDistance = 2;
 
             FaceTarget();
             agent.SetDestination(target.position);
