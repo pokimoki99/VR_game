@@ -11,13 +11,7 @@ public class Boss_Health : MonoBehaviour
     public GameObject healthBarUI;
     public Slider slider;
 
-    public GameObject enemypos;
-
-    public int death;
-
-
-    string type;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +30,7 @@ public class Boss_Health : MonoBehaviour
         }
         if (health <= 0)
         {
-            enemypos.transform.position = gameObject.transform.position;
             Destroy(gameObject);
-            death++;
         }
         if (health > maxHealth)
         {
@@ -51,8 +43,15 @@ public class Boss_Health : MonoBehaviour
         return health / maxHealth;
     }
 
-    void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.tag == "Sword")
+        {
+            health-=50;
+        }
+        if (other.gameObject.tag == "projectile")
+        {
+            health -= 50;
+        }
     }
 }
