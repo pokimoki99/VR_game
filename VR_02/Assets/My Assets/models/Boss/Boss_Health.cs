@@ -53,5 +53,6 @@ public class Boss_Health : MonoBehaviour
         {
             health -= 50;
         }
+
     }
 }
