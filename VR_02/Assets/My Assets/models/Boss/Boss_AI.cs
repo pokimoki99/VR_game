@@ -45,7 +45,9 @@ public class Boss_AI : MonoBehaviour
     {
         // Setting up the references.
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        
+
+        var rotation = Quaternion.LookRotation(player_transform.position - transform.position);
+        transform.rotation = rotation;//Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
 
         anim = this.gameObject.GetComponent<Animator>();
 
@@ -87,7 +89,7 @@ public class Boss_AI : MonoBehaviour
 
         }
 
-        if (enemydist <= 6)
+        if (enemydist <= 4)
         {
 
             state = AIState.Attacking;
@@ -105,17 +107,21 @@ public class Boss_AI : MonoBehaviour
 
     void Attacking()
     {
-        var rotation = Quaternion.LookRotation(player_transform.position - transform.position);
-        transform.rotation = rotation;//Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
+        
         if (timer >= timeBetweenAttacks)
         { 
 
             nav.speed = 0;
             if (attacking == false)
             {
+
+                Leg_Sweep.GetComponent<BoxCollider>().enabled = true;
+                Swipe.GetComponent<BoxCollider>().enabled = true;
+                Cast.GetComponent<BoxCollider>().enabled = true;
+                Punch.GetComponent<BoxCollider>().enabled = true;
+                Kick.GetComponent<BoxCollider>().enabled = true;
                 if (attack == 0)
                 {
-                    Leg_Sweep.GetComponent<BoxCollider>().enabled = false;
                     anim.SetBool("IsAttacking", true);
                     anim.SetFloat("attack", 0);
                     StartCoroutine(Attack_timer());
@@ -127,7 +133,6 @@ public class Boss_AI : MonoBehaviour
                 }
                 else if (attack == 1)
                 {
-                    Punch.GetComponent<BoxCollider>().enabled = false;
                     anim.SetBool("IsAttacking", true);
                     anim.SetFloat("attack", 0.25f);
                     StartCoroutine(Attack_timer());
@@ -140,7 +145,6 @@ public class Boss_AI : MonoBehaviour
                 }
                 else if (attack == 2)
                 {
-                    Cast.GetComponent<BoxCollider>().enabled = true;
                     anim.SetBool("IsAttacking", true);
                     anim.SetFloat("attack", 0.5f);
                     StartCoroutine(Attack_timer());
@@ -153,7 +157,6 @@ public class Boss_AI : MonoBehaviour
                 }
                 else if (attack == 3)
                 {
-                    Swipe.GetComponent<BoxCollider>().enabled = true;
                     anim.SetBool("IsAttacking", true);
                     anim.SetFloat("attack", 0.75f);
                     StartCoroutine(Attack_timer());
@@ -164,7 +167,6 @@ public class Boss_AI : MonoBehaviour
                 }
                 else if (attack == 4)
                 {
-                    Kick.GetComponent<BoxCollider>().enabled = true;
                     anim.SetBool("IsAttacking", true);
                     anim.SetFloat("attack", 1);
                     StartCoroutine(Attack_timer());
@@ -179,56 +181,68 @@ public class Boss_AI : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)
         {
             player_hit = true;
+
+
             if (player_hit)
             {
-                    if (Leg_Sweep_Hit)
-                {
-                    Leg_Sweep.GetComponent<BoxCollider>().enabled = false;
-                    player_hp.health-=10;
-                        Leg_Sweep_Hit = false;
-                        Debug.Log("leg");
-                        attacking = false;
-                    }
-                    else if (Swipe_Hit)
-                {
-                    Swipe.GetComponent<BoxCollider>().enabled = false;
-                    player_hp.health-=3;
-                        Swipe_Hit = false;
-                        Debug.Log("swipe");
-                        attacking = false;
 
-                    }
-                    else if (Cast_Hit)
+                Leg_Sweep.GetComponent<BoxCollider>().enabled = false;
+                Swipe.GetComponent<BoxCollider>().enabled = false;
+                Cast.GetComponent<BoxCollider>().enabled = false;
+                Punch.GetComponent<BoxCollider>().enabled = false;
+                Kick.GetComponent<BoxCollider>().enabled = false;
+                if (Leg_Sweep_Hit)
                 {
-                    Cast.GetComponent<BoxCollider>().enabled = false;
+                    //Leg_Sweep.GetComponent<BoxCollider>().enabled = true;
+                    player_hp.health-=0.2f;
+                    Leg_Sweep_Hit = false;
+                    Debug.Log("leg");
+                    attacking = false;
+                    Leg_Sweep.GetComponent<BoxCollider>().enabled = false;
+                }
+                else if (Swipe_Hit)
+                {
+                    //Swipe.GetComponent<BoxCollider>().enabled = true;
+                    player_hp.health-=0.3f;
+                    Swipe_Hit = false;
+                    Debug.Log("swipe");
+                    attacking = false;
+                    Swipe.GetComponent<BoxCollider>().enabled = false;
+
+                }
+                else if (Cast_Hit)
+                {
+                    //Cast.GetComponent<BoxCollider>().enabled = true;
                     //Cast_Hit = false;
-                    player_hp.health-=1;
-                        Debug.Log("cast");
-                        attacking = false;
-                    }
-                    else if (Punch_Hit)
+                    player_hp.health-=0.1f;
+                    Debug.Log("cast");
+                    attacking = false;
+                    Cast.GetComponent<BoxCollider>().enabled = false;
+                }
+                else if (Punch_Hit)
                 {
-                    Punch.GetComponent<BoxCollider>().enabled = false;
-                    player_hp.health-=2;
+                    //Punch.GetComponent<BoxCollider>().enabled = true;
+                    player_hp.health-=0.2f;
                     Punch_Hit = false;
-                        Debug.Log("punch");
-                        attacking = false;
-                    }
-                    else if (Kick_Hit)
+                    Debug.Log("punch");
+                    attacking = false;
+                    Punch.GetComponent<BoxCollider>().enabled = false;
+                }
+                else if (Kick_Hit)
                 {
+                    //Kick.GetComponent<BoxCollider>().enabled = true;
+                    player_hp.health-=-0.2f;
+                    Kick_Hit = false;
+                    Debug.Log("kick");
+                    attacking = false;
                     Kick.GetComponent<BoxCollider>().enabled = false;
-                    player_hp.health-=-2;
-                        Kick_Hit = false;
-                        Debug.Log("kick");
-                        attacking = false;
-                    }
-                    player_hit = false;
-                
+                }
+                player_hit = false;
             }
         }
     }

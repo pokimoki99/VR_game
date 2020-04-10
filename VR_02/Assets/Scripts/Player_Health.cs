@@ -31,7 +31,7 @@ public class Player_Health : MonoBehaviour
         }
         if (other.gameObject.tag == "enemies_projectile")
         {
-            ModifyHealth(-10);
+            ModifyHealth(-5);
             Debug.Log("player" + currentHealth);
         }
         if(currentHealth <= 0)

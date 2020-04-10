@@ -16,10 +16,10 @@ public static class Scene_manager
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Character_Selection"))
         {
 
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Overground");
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("SampleScene"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Overground"))
         {
 
             SceneManager.LoadScene("Open_arena");
@@ -35,6 +35,12 @@ public static class Scene_manager
         {
 
             SceneManager.LoadScene("Bossfight");
+        }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Bossfight"))
+        {
+
+            SceneManager.LoadScene("SampleScene");
         }
 
 

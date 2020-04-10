@@ -59,7 +59,7 @@ public class Button : MonoBehaviour
 
             if (once)
             {
-            cooldown.timerstart = 300;
+            cooldown.timerstart = 230;
             cooldown.cdt();
                 once = false;
             }

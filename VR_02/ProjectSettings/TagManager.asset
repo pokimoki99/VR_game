@@ -10,6 +10,8 @@ TagManager:
   - waypoint
   - enemies_projectile
   - enemies_sword
+  - Boss
+  - Weapon
   layers:
   - Default
   - TransparentFX

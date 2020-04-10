@@ -14,7 +14,8 @@ public class Healthbar_player : MonoBehaviour
 
     private void Awake()
     {
-        GetComponentInParent<Player_Health>().OnHealthPctChanged += HandleHealthChanged;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Health>().OnHealthPctChanged += HandleHealthChanged;
+        //GetComponentInParent<Player_Health>().OnHealthPctChanged += HandleHealthChanged;
     }
     private void HandleHealthChanged(float pct)
     {
@@ -35,6 +36,7 @@ public class Healthbar_player : MonoBehaviour
     private void LateUpdate()
     {
         transform.LookAt(Camera.main.transform);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Health>().OnHealthPctChanged += HandleHealthChanged;
         //transform.Rotate(0, 180);
     }
 }

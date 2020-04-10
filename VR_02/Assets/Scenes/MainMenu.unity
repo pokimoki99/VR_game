@@ -699,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4bdc0b80b05ca48b28009d5ea611d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: Character_Selection
 --- !u!114 &1167463144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,6 +1049,11 @@ PrefabInstance:
       propertyPath: speed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 788634247434224978, guid: 20e57f2dc3a99b54fa13ae64ca968a3d,
+        type: 3}
+      propertyPath: change
+      value: 
+      objectReference: {fileID: 1167463143}
     - target: {fileID: 788634246983590359, guid: 20e57f2dc3a99b54fa13ae64ca968a3d,
         type: 3}
       propertyPath: m_IsActive

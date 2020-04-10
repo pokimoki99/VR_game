@@ -18,15 +18,25 @@ public class EnemyController : MonoBehaviour
     int loc;
     bool check = true;
     Vector3 lastpos;
+
+
+
+    //public Animator anim;
+    public Transform enemybullet;
+    bool enemy;
+    public GameObject bulletpos;
+
     void Start()
     {
-        target = PlayerManager.instance.player.transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         Location();
     }
     
     void Update()
     {
+
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         float distance = Vector3.Distance(target.position, this.transform.position);
         if (distance <=lookRadius)
         {
@@ -45,14 +55,20 @@ public class EnemyController : MonoBehaviour
             }
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Underground_arena"))
             {
-                if (distance >= 10)
+                if (distance >=10)
+                {
+                    Patrolling();
+                }
+
+
+                if (distance >= 1 && distance <10)
                 {
                     if (check)
                     {
                         //Location();
                         check = false;
                     }
-                    Patrolling();
+                    Shooting();
                 }
             }
             lastpos = this.gameObject.transform.position;
@@ -87,6 +103,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    void Shooting()
+    {
+        //anim.SetBool("Shoot", true);
+        agent.speed = 0;
+        FaceTarget();
+        if (enemy == false)
+        {
+
+            //if (anim.GetBool("Shoot") && (!anim.GetBool("IsShooting")))
+            //{
+            enemy = true;
+                //anim.SetBool("IsShooting", true);
+                Instantiate(enemybullet, bulletpos.transform.position, transform.rotation);
+                StartCoroutine(Rapid());
+            Debug.Log("shooting");
+
+            //}
+        }
+    }
     void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -118,4 +153,12 @@ public class EnemyController : MonoBehaviour
     //    location();
     //    //Debug.Log("next");
     //}
+
+    IEnumerator Rapid()
+    {
+        yield return new WaitForSeconds(1.5f);
+        enemy = false;
+        //anim.SetBool("Shoot", false);
+        //anim.SetBool("IsShooting", false);
+    }
 }

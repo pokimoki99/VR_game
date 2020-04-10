@@ -9,7 +9,7 @@ public class SimpleAttach : MonoBehaviour
     private Interactable interactable;
 
     protected bool attached = false;
-
+    public bool gun_attached;
 
     [EnumFlags]
     [Tooltip("The flags used to attach this object to the hand.")]
@@ -49,24 +49,34 @@ public class SimpleAttach : MonoBehaviour
             hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
             hand.HideGrabHint();
 
-            if (this.gameObject.tag=="Shield")
+            if (this.gameObject.tag == "Weapon")
             {
-                shield = true;
-            }
-
-            if (this.gameObject.tag=="Sword")
-            {
-                sword = true;
+                gun_attached = true;
             }
 
         }
+        if (sword == true)
+        {
+            if (this.gameObject.tag == "Sword")
+            {
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
+            }
+        }
 
-        
+        if (shield == true)
+        {
+            if (this.gameObject.tag == "Shield")
+            {
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
+            }
+        }
+
     }
 
     private void Update()
     {
         GrabPinch.AddOnStateUpListener(Press, inputSource);
+
 
     }
     private void Press(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
@@ -74,6 +84,9 @@ public class SimpleAttach : MonoBehaviour
 
             Left_hand.DetachObject(this.gameObject);
             Right_hand.DetachObject(this.gameObject);
+            gun_attached = false;
+        shield = false;
+        sword = false;
     }
 
 }

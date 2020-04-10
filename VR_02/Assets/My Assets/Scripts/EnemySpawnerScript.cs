@@ -5,39 +5,42 @@ using UnityEngine;
 public class EnemySpawnerScript : MonoBehaviour
 {
     public GameObject theEnemyGunner;
-    public GameObject theEnemySwordsmen;
+    //public GameObject theEnemySwordsmen;
     int xPos;
     int zPos;
-    int enemyCount;
+    public int enemyCount;
     public timer tim;
     int enemyRand;
-    void Start()
+    bool time=true;
+    void Update()
     {
-        StartCoroutine(EnemyDrop());
-    }
-    IEnumerator EnemyDrop()
-    {
-        if (tim.timerstart<=200 && tim.timerstart>=0)
+        if (enemyCount<=10)
         {
-            while (enemyCount < 10)
+            enemySpawn();
+        }
+    }
+    void enemySpawn()
+    {
+        if (tim.timerstart <= 200 && tim.timerstart > 0)
+        {
+            for (enemyCount = 0; enemyCount < 10; enemyCount++)
             {
-                xPos = Random.Range(0, 26);
-                zPos = Random.Range(11, 30);
-                enemyRand = Random.Range(0, 2);
-                if(enemyRand == 0)
+                if (time==true)
                 {
-                    Instantiate(theEnemyGunner, new Vector3(xPos, 29, zPos), Quaternion.identity);
-
+                    xPos = Random.Range(0, 26);
+                    zPos = Random.Range(11, 30);
+                    Instantiate(theEnemyGunner, new Vector3(xPos, 30, zPos), Quaternion.identity);
+                    StartCoroutine(EnemyDrop());
+                    time = false;
                 }
-               
-                else
-                {
-                    Instantiate(theEnemySwordsmen, new Vector3(xPos, 29, zPos), Quaternion.identity);
-                }
-                yield return new WaitForSeconds(3.0f);
-                enemyCount += 1;
             }
         }
+    }
+
+    IEnumerator EnemyDrop()
+    {
+      yield return new WaitForSeconds(6.0f);
+        time = true;
     }
 }
 

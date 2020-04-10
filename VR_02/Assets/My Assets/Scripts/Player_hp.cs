@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_hp : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class Player_hp : MonoBehaviour
         }
         if (health <= 0)
         {
-            //Destroy(gameObject);
+            SceneManager.LoadScene("Character_Selection");
             death++;
         }
         if (health > maxHealth)

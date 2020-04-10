@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class stagesel : MonoBehaviour
 {
+    public string scene;
     public void Changing_scene()
     {
         
         Debug.Log("change scene being called");
-        Scene_manager.Load();
+        //Scene_manager.Load();
+        SceneManager.LoadScene(scene);
     }
 }
